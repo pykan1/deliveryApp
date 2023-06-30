@@ -1,8 +1,6 @@
 package com.example.deliveryapp.data.api.remoteDataSource
 
 import com.example.deliveryapp.data.api.apiService.AuthService
-import com.example.deliveryapp.data.api.apiService.BuyerService
-import com.example.deliveryapp.data.api.model.AccessTokenModel
 import com.example.deliveryapp.data.api.model.AuthModel
 import com.example.deliveryapp.data.api.model.RefreshTokenModel
 import com.example.deliveryapp.data.api.model.RegModel
