@@ -1,5 +1,6 @@
 package com.example.deliveryapp.data.local.repositoryImpl
 
+import com.example.deliveryapp.data.local.model.UserModel
 import com.example.deliveryapp.data.local.repository.UserRepository
 import javax.inject.Inject
 
@@ -11,4 +12,5 @@ class UserRepositoryImpl @Inject constructor(
 
     suspend fun deleteUser() = userRepository.deleteUser()
 
+    suspend fun insertUser(userModel: UserModel) = userRepository.insertUser(userModel)
 }

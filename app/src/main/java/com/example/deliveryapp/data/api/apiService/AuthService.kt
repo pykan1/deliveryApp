@@ -1,6 +1,7 @@
 package com.example.deliveryapp.data.api.apiService
 
 import com.example.deliveryapp.data.api.model.AuthModel
+import com.example.deliveryapp.data.api.model.NumberModel
 import com.example.deliveryapp.data.api.model.RefreshTokenModel
 import com.example.deliveryapp.data.api.model.RegModel
 import com.example.deliveryapp.data.api.model.UserResponseModel
@@ -17,6 +18,9 @@ interface AuthService {
 
     @POST("update_access_token")
     suspend fun updateAccessToken(@Body request: RefreshTokenModel): String
+
+    @POST("check_number")
+    suspend fun checkNumber(@Body request: NumberModel): Boolean
 
 
 }

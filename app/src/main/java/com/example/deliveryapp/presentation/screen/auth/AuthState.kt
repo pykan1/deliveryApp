@@ -5,5 +5,7 @@ data class AuthState (
     val login: String = "",
     val password: String = "",
     val number: String = "",
-    val number2: String = "",
+    val password2: String = "",
+    val screen: String = "number", //and login and register
+    val exception: String = ""
     )

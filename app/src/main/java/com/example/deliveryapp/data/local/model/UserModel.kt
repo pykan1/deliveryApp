@@ -8,6 +8,6 @@ import java.util.UUID
 data class UserModel(
     @PrimaryKey(autoGenerate = false)
     val id_person: UUID,
-    val id_role: Byte,
+    val id_role: Int,
     val login: String,
 )

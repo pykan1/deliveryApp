@@ -20,7 +20,7 @@ sealed class Screens(val route: String, val icon: Int) {
     object Auth: Screens(route = "auth_screen", icon = R.drawable.cart_icon)
     object Catalog: Screens(route = "catalog_screen", icon = R.drawable.catalog_icon)
     object Trash: Screens(route = "trash_screen", icon = R.drawable.basket_icon)
-    object Profile: Screens(route = "profile_screen", icon = 0)
+    object Profile: Screens(route = "profile_screen", icon = R.drawable.user_icon)
 }
 
 
