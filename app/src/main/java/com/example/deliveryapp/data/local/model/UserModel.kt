@@ -7,7 +7,7 @@ import java.util.UUID
 @Entity(tableName = "user")
 data class UserModel(
     @PrimaryKey(autoGenerate = false)
-    val id_person: UUID,
-    val id_role: Int,
-    val login: String,
+    val id_person: UUID = UUID.randomUUID(),
+    val id_role: Int = 1,
+    val login: String = "",
 )

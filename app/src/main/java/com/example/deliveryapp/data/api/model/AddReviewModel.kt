@@ -3,8 +3,8 @@ package com.example.deliveryapp.data.api.model
 import com.example.deliveryapp.domain.model.ReviewModel
 import java.util.UUID
 
-class AddReviewModel(
-    id_item: UUID,
-    review: ReviewModel,
-    access_token: String
+data class AddReviewModel(
+    val id_item: UUID,
+    val review: ReviewModel,
+    val access_token: String
 )

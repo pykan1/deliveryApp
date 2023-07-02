@@ -7,6 +7,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -25,8 +26,14 @@ sealed class Screens(val route: String, val icon: Int) {
 
 
 @Composable
-fun SetupNavHost(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screens.Auth.route) {
+fun SetupNavHost(navController: NavHostController, viewModel: NavigationViewModel) {
+    val stateNavigation = viewModel.stateNavigation.collectAsState()
+    NavHost(navController = navController, startDestination =
+    if (stateNavigation.value.user == null)
+        Screens.Auth.route
+    else
+        Screens.Catalog.route
+    ) {
         
         composable(route = Screens.Main.route) {
 

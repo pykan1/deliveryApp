@@ -40,7 +40,9 @@ fun NumberScreen(viewModel: AuthViewModel) {
     val localFocusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    Column(modifier = Modifier.pointerInput(Unit) {
+    Column(modifier = Modifier
+        .background(color = Color.Transparent)
+        .pointerInput(Unit) {
         detectTapGestures(onTap = {
             localFocusManager.clearFocus()
         })
@@ -49,7 +51,7 @@ fun NumberScreen(viewModel: AuthViewModel) {
             modifier = Modifier
                 .weight(1f)
                 .fillMaxSize()
-                .background(Color.White),
+                .background(color = Color.Transparent),
             contentAlignment = Alignment.BottomCenter
         ) {
             TextField(
@@ -72,7 +74,7 @@ fun NumberScreen(viewModel: AuthViewModel) {
             modifier = Modifier
                 .weight(1f)
                 .fillMaxSize()
-                .background(Color.White),
+                .background(color = Color.Transparent),
             contentAlignment = Alignment.Center
         ) {
             Button(
@@ -85,13 +87,13 @@ fun NumberScreen(viewModel: AuthViewModel) {
                     contentColor = Color.Black
                 ),
                 modifier = Modifier
-                    .padding(start = 70.dp, end = 70.dp)
+                    .padding(start = 80.dp, end = 80.dp)
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(15.dp))
             ) {
                 Text(
                     text = "Дальше",
-                    fontSize = 24.sp
+                    fontSize = 20.sp
                 )
             }
         }

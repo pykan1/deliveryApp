@@ -21,10 +21,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            DeliveryAppTheme {
                 val navController = rememberNavController()
                 SetupNavHostScreen(navController = navController)
-            }
         }
     }
 }

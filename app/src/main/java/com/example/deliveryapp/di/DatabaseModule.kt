@@ -36,7 +36,7 @@ object DatabaseModule {
     @Provides
     fun provideAuthService(): AuthService {
         return Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8001")
+            .baseUrl("http://192.168.0.108:8001")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(AuthService::class.java)
@@ -45,7 +45,7 @@ object DatabaseModule {
     @Provides
     fun provideBuyerService(): BuyerService {
         return Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8002")
+            .baseUrl("http://192.168.0.108:8002")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(BuyerService::class.java)

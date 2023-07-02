@@ -1,8 +1,8 @@
 package com.example.deliveryapp.data.api.model
 
-class RegModel(
-    id_role: Int,
-    number: String,
-    login: String,
-    password: String
+data class RegModel(
+    val id_role: Int,
+    val number: String,
+    val login: String,
+    val password: String
 )

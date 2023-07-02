@@ -2,7 +2,7 @@ package com.example.deliveryapp.data.api.model
 
 import java.util.UUID
 
-class GetItemModel(
-    id_item: UUID,
-    access_token: String
+data class GetItemModel(
+    val id_item: UUID,
+    val access_token: String
 )
