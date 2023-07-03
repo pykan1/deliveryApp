@@ -191,24 +191,24 @@ class AuthViewModel @Inject constructor(
                 ).let {
                     val dataStoreManager = DataStoreManager(context)
                     Log.d("11", it.toString())
-//                    userRepositoryImpl.insertUser(
-//                        UserModel(
-//                            id_role = it.role,
-//                            id_person = it.id_person,
-//                            login = it.login
-//                        )
-//                    )
-//                    dataStoreManager.saveUser(
-//                        UserDataStoreModel(
-//                            refreshToken = it.refresh_token,
-//                            accessToken = it.access_token,
-//                            number = it.number
-//                        )
-//                    ).let {
-//                        withContext(Dispatchers.Main) {
-//                            navController.navigate(Screens.Catalog.route)
-//                        }
-//                    }
+                    userRepositoryImpl.insertUser(
+                        UserModel(
+                            id_role = it.role,
+                            id_person = it.id_person,
+                            login = it.login
+                        )
+                    )
+                    dataStoreManager.saveUser(
+                        UserDataStoreModel(
+                            refreshToken = it.refresh_token,
+                            accessToken = it.access_token,
+                            number = it.number
+                        )
+                    ).let {
+                        withContext(Dispatchers.Main) {
+                            navController.navigate(Screens.Catalog.route)
+                        }
+                    }
                 }
 
             }
