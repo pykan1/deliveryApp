@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.ContentAlpha
+import androidx.compose.material.Text
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
@@ -20,6 +21,8 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.example.deliveryapp.presentation.ui.theme.ButtonColor
+import com.example.deliveryapp.presentation.ui.theme.TextFieldColor
 
 @Composable
 fun BottomBar(navController: NavHostController) {
@@ -55,15 +58,17 @@ fun RowScope.AddItem(
             .wrapContentSize(),
         icon = {
             Image(
-                modifier = Modifier.size(40.dp),
+                modifier = Modifier.size(30.dp),
                 painter = painterResource(id = screen.icon),
                 contentDescription = "Navigation Icon"
             )
         },
+        label = { Text(text = screen.label) },
         selected = currentDestination?.hierarchy?.any {
             it.route == screen.route
         } == true,
-        unselectedContentColor = LocalContentColor.current.copy(alpha = ContentAlpha.disabled),
+        unselectedContentColor = Color.Black,
+        selectedContentColor = ButtonColor,
         onClick = {
             navController.navigate(screen.route) {
                 popUpTo(navController.graph.findStartDestination().id)

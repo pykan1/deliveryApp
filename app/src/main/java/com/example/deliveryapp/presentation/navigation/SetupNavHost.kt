@@ -16,12 +16,12 @@ import androidx.navigation.compose.composable
 import com.example.deliveryapp.R
 import com.example.deliveryapp.presentation.screen.auth.AuthScreen
 
-sealed class Screens(val route: String, val icon: Int) {
-    object Main: Screens(route = "main_screen", icon = R.drawable.cart_icon)
-    object Auth: Screens(route = "auth_screen", icon = R.drawable.cart_icon)
-    object Catalog: Screens(route = "catalog_screen", icon = R.drawable.catalog_icon)
-    object Trash: Screens(route = "trash_screen", icon = R.drawable.basket_icon)
-    object Profile: Screens(route = "profile_screen", icon = R.drawable.user_icon)
+sealed class Screens(val route: String, val icon: Int, val label: String) {
+    object Main: Screens(route = "main_screen", icon = R.drawable.cart_icon, label = "Магазин")
+    object Auth: Screens(route = "auth_screen", icon = R.drawable.cart_icon, label = "Каталог")
+    object Catalog: Screens(route = "catalog_screen", icon = R.drawable.catalog_icon, label = "Каталог")
+    object Trash: Screens(route = "trash_screen", icon = R.drawable.basket_icon, label = "Корзина")
+    object Profile: Screens(route = "profile_screen", icon = R.drawable.user_icon, label = "Профиль")
 }
 
 
