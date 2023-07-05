@@ -12,8 +12,8 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.deliveryapp.R
 
 @Composable
-fun BackgroundLottie() {
-    val composition = rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.background))
+fun BackgroundLottie(img: LottieCompositionSpec) {
+    val composition = rememberLottieComposition(img)
     val progress by animateLottieCompositionAsState(
         composition = composition.value,
         iterations = LottieConstants.IterateForever

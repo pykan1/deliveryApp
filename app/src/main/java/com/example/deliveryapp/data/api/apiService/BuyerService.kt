@@ -3,6 +3,8 @@ package com.example.deliveryapp.data.api.apiService
 import com.example.deliveryapp.data.api.model.AccessTokenModel
 import com.example.deliveryapp.data.api.model.AddReviewModel
 import com.example.deliveryapp.data.api.model.GetItemModel
+import com.example.deliveryapp.data.api.model.GetItemsByCategoryModel
+import com.example.deliveryapp.domain.model.CategoryModel
 import com.example.deliveryapp.domain.model.ItemModel
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -23,6 +25,12 @@ interface BuyerService {
 
     @POST("item/add_review_item")
     suspend fun addReviewItem(@Body request: AddReviewModel)
+
+    @POST("item/get_items_by_category")
+    suspend fun getItemsByCategory(@Body request: GetItemsByCategoryModel): List<ItemModel>
+
+    @POST("item/get_category")
+    suspend fun getCategory(@Body request: AccessTokenModel): List<CategoryModel>
 
     @POST("item/get_items")
     suspend fun getItems(@Body request: AccessTokenModel)
