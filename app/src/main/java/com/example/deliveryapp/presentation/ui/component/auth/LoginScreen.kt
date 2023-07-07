@@ -42,7 +42,7 @@ import com.example.deliveryapp.presentation.ui.theme.TextFieldColor
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
+fun     LoginScreen(viewModel: AuthViewModel, navController: NavController) {
     val stateAuth = viewModel.stateAuth.collectAsState()
     val context = LocalContext.current
     val localFocusManager = LocalFocusManager.current

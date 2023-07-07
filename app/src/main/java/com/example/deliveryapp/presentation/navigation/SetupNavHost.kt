@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.deliveryapp.R
 import com.example.deliveryapp.presentation.screen.auth.AuthScreen
+import com.example.deliveryapp.presentation.screen.category.CategoryScreen
 
 sealed class Screens(val route: String, val icon: Int, val label: String) {
     object Main: Screens(route = "main_screen", icon = R.drawable.cart_icon, label = "Магазин")
@@ -44,7 +45,7 @@ fun SetupNavHost(navController: NavHostController, viewModel: NavigationViewMode
         }
 
         composable(route = Screens.Catalog.route) {
-
+            CategoryScreen(navController = navController)
         }
 
         composable(route = Screens.Trash.route) {

@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.deliveryapp.data.datastore.model.UserDataStoreModel
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("user_data_store")
@@ -28,6 +29,11 @@ class DataStoreManager(val context: Context) {
             number = pref[stringPreferencesKey("number")] ?: ""
         )
     }
+
+    fun getAccessToken() = context.dataStore.data.map { pref ->
+        return@map pref[stringPreferencesKey("access_token")] ?: ""
+    }
+
 
     suspend fun deleteUser() {
         context.dataStore.edit { pref ->
