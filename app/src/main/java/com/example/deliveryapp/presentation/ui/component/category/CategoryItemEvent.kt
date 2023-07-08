@@ -8,4 +8,4 @@ class UnLoadingEvent(): CategoryItemEvent
 
 class LoadingImage(): CategoryItemEvent
 
-class InitDataEvent(val title: String, val img: String, val id_category: Int): CategoryItemEvent
+class InitDataEvent(val title: String, val img: String? = null, val id_category: Int): CategoryItemEvent

@@ -2,14 +2,17 @@ package com.example.deliveryapp.presentation.screen.category
 
 import android.content.Context
 import android.util.Log
+import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.deliveryapp.data.api.model.AccessTokenModel
 import com.example.deliveryapp.data.api.remoteDataSource.BuyerRemoteDataSource
 import com.example.deliveryapp.data.datastore.DataStoreManager
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,14 +35,10 @@ class CategoryViewModel @Inject constructor(
     private fun getCategory(context: Context) {
         val dataStoreManager = DataStoreManager(context)
         viewModelScope.launch {
-            stateCategory.emit(
-                CategoryState(
-                    isLoading = true,
-                    categories = stateCategory.value.categories
-                )
-            )
-            val accessToken = dataStoreManager.getAccessToken().first().let {
-                Log.d("11", it.toString())
+            stateCategory.update { state ->
+                state.copy(isLoading = true)
+            }
+            dataStoreManager.getAccessToken().first().let {
                 buyerRemoteDataSource.getCategory(
                     AccessTokenModel(
                         access_token = it
