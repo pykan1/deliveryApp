@@ -18,9 +18,9 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.deliveryapp.R
-import com.example.deliveryapp.presentation.ui.component.auth.LoginScreen
-import com.example.deliveryapp.presentation.ui.component.auth.NumberScreen
-import com.example.deliveryapp.presentation.ui.component.auth.RegisterScreen
+import com.example.deliveryapp.presentation.ui.component.authItem.LoginScreen
+import com.example.deliveryapp.presentation.ui.component.authItem.NumberScreen
+import com.example.deliveryapp.presentation.ui.component.authItem.RegisterScreen
 
 
 @Composable

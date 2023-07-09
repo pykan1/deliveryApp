@@ -1,4 +1,4 @@
-package com.example.deliveryapp.presentation.ui.component.auth
+package com.example.deliveryapp.presentation.ui.component.authItem
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -22,40 +22,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.deliveryapp.presentation.screen.auth.AuthViewModel
 import com.example.deliveryapp.presentation.screen.auth.ChangeNumberEvent
-import com.example.deliveryapp.presentation.screen.auth.ChangePasswordEvent
 import com.example.deliveryapp.presentation.screen.auth.CheckNumberEvent
-import com.example.deliveryapp.presentation.screen.auth.LoginEvent
 import com.example.deliveryapp.presentation.ui.theme.ButtonColor
 import com.example.deliveryapp.presentation.ui.theme.TextFieldColor
 
-@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun     LoginScreen(viewModel: AuthViewModel, navController: NavController) {
+fun NumberScreen(viewModel: AuthViewModel) {
     val stateAuth = viewModel.stateAuth.collectAsState()
-    val context = LocalContext.current
     val localFocusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
+
     Column(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.Transparent)
+        .background(color = Color.Transparent)
         .pointerInput(Unit) {
-            detectTapGestures(onTap = {
-                localFocusManager.clearFocus()
-            })
-        }
-    ) {
+        detectTapGestures(onTap = {
+            localFocusManager.clearFocus()
+        })
+    }.fillMaxSize()) {
         Box(
             modifier = Modifier
                 .weight(1f)
@@ -64,9 +55,9 @@ fun     LoginScreen(viewModel: AuthViewModel, navController: NavController) {
             contentAlignment = Alignment.BottomCenter
         ) {
             TextField(
-                value = stateAuth.value.password,
-                onValueChange = { viewModel.send(event = ChangePasswordEvent(it)) },
-                label = { Text(text = "Пароль...") },
+                value = stateAuth.value.number,
+                onValueChange = { viewModel.send(event = ChangeNumberEvent(it)) },
+                label = { Text(text = "Номер телефона...") },
                 colors = TextFieldDefaults.textFieldColors(
                     textColor = Color.Black,
                     containerColor = TextFieldColor
@@ -89,7 +80,7 @@ fun     LoginScreen(viewModel: AuthViewModel, navController: NavController) {
             Button(
                 onClick = {
                     keyboardController?.hide()
-                    viewModel.send(event = LoginEvent(context, navController))
+                    viewModel.send(event = CheckNumberEvent())
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = ButtonColor,
@@ -101,7 +92,7 @@ fun     LoginScreen(viewModel: AuthViewModel, navController: NavController) {
                     .clip(RoundedCornerShape(15.dp))
             ) {
                 Text(
-                    text = "Войти",
+                    text = "Дальше",
                     fontSize = 20.sp
                 )
             }

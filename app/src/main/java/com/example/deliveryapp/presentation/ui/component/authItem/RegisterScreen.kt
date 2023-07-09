@@ -1,4 +1,4 @@
-package com.example.deliveryapp.presentation.ui.component.auth
+package com.example.deliveryapp.presentation.ui.component.authItem
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -35,7 +35,6 @@ import com.example.deliveryapp.presentation.screen.auth.AuthViewModel
 import com.example.deliveryapp.presentation.screen.auth.ChangeLoginEvent
 import com.example.deliveryapp.presentation.screen.auth.ChangePassword2Event
 import com.example.deliveryapp.presentation.screen.auth.ChangePasswordEvent
-import com.example.deliveryapp.presentation.screen.auth.LoginEvent
 import com.example.deliveryapp.presentation.screen.auth.RegisterEvent
 import com.example.deliveryapp.presentation.ui.theme.ButtonColor
 import com.example.deliveryapp.presentation.ui.theme.TextFieldColor

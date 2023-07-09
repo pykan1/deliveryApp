@@ -1,4 +1,4 @@
-package com.example.deliveryapp.presentation.ui.component.category
+package com.example.deliveryapp.presentation.ui.component.categoryItem
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -6,23 +6,18 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -33,9 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.deliveryapp.R
 import com.example.deliveryapp.domain.model.CategoryModel
-import com.example.deliveryapp.presentation.screen.category.CategoryEvent
 import com.example.deliveryapp.presentation.screen.category.CategoryViewModel
-import com.example.deliveryapp.presentation.ui.component.LoadingIndicator
 
 @Composable
 fun CategoryItem(

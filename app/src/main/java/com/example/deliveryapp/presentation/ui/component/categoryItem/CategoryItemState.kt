@@ -1,4 +1,4 @@
-package com.example.deliveryapp.presentation.ui.component.category
+package com.example.deliveryapp.presentation.ui.component.categoryItem
 
 import androidx.compose.ui.graphics.ImageBitmap
 

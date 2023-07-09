@@ -1,11 +1,11 @@
-package com.example.deliveryapp.presentation.ui.component.category
+package com.example.deliveryapp.presentation.ui.component.categoryItem
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.deliveryapp.domain.usecase.DecodeBase64ImageUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.util.Base64
@@ -71,7 +71,7 @@ class CategoryItemViewModel : ViewModel() {
                     id_category = id_category,
                     img = img,
                     decodeImg = if (img != null) {
-                        decodeBase64Image(img)?.asImageBitmap()
+                        DecodeBase64ImageUseCase().invoke(img)?.asImageBitmap()
                     } else null
                 )
             )
@@ -87,7 +87,7 @@ class CategoryItemViewModel : ViewModel() {
                     img = stateCategoryItem.value.img,
                     id_category = stateCategoryItem.value.id_category,
                     decodeImg = if (stateCategoryItem.value.img != null) {
-                        decodeBase64Image(
+                        DecodeBase64ImageUseCase().invoke(
                             stateCategoryItem.value.img!!
                         )?.asImageBitmap()
                     } else null
@@ -97,14 +97,3 @@ class CategoryItemViewModel : ViewModel() {
     }
 }
 
-private fun decodeBase64Image(img: String): Bitmap? {
-    return try {
-        val base64Decoder = Base64.getDecoder()
-        val decodedBytes = base64Decoder.decode(img)
-
-        BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
-    } catch (e: Exception) {
-        e.printStackTrace()
-        null
-    }
-}
