@@ -1,5 +1,6 @@
 package com.example.deliveryapp.presentation.ui.component.categoryItem
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,7 +16,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -34,12 +37,13 @@ import com.example.deliveryapp.presentation.screen.category.CategoryViewModel
 @Composable
 fun CategoryItem(
     navController: NavController,
-    categoryViewModel: CategoryViewModel,
     model: CategoryModel
 ) {
     val viewModel = CategoryItemViewModel()
-    val stateCategoryItem = viewModel.stateCategoryItem.collectAsState()
-    viewModel.send(InitDataEvent(model.category, model.img, model.id_category))
+    val stateCategoryItem by viewModel.stateCategoryItem.collectAsState()
+    LaunchedEffect(key1 = stateCategoryItem.id_category == 0) {
+        viewModel.send(InitDataEvent(model.category, model.img, model.id_category))
+    }
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -50,7 +54,7 @@ fun CategoryItem(
             .background(Color.Transparent)
             .clickable { viewModel.send(OpenCategoriesItemsEvent(navController)) }
     ) {
-        if (stateCategoryItem.value.isLoading) {
+        if (stateCategoryItem.isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier
                     .size(35.dp)
@@ -64,7 +68,7 @@ fun CategoryItem(
                     .padding(5.dp),
                 horizontalArrangement = Arrangement.spacedBy(15.dp)
             ) {
-                if (stateCategoryItem.value.decodeImg == null) {
+                if (stateCategoryItem.decodeImg == null) {
                     Image(
                         painter = painterResource(id = R.drawable.not_image),
                         contentDescription = null,
@@ -73,7 +77,7 @@ fun CategoryItem(
                     )
                 } else {
                     Image(
-                        bitmap = stateCategoryItem.value.decodeImg!!,
+                        bitmap = stateCategoryItem.decodeImg!!,
                         contentDescription = null,
                         modifier = Modifier
                             .size(60.dp)
@@ -81,7 +85,7 @@ fun CategoryItem(
                 }
                 Text(
                     modifier = Modifier.wrapContentHeight(),
-                    text = stateCategoryItem.value.title,
+                    text = stateCategoryItem.title,
                     color = Color.Black,
                     fontFamily = FontFamily.SansSerif,
                     textAlign = TextAlign.Center,

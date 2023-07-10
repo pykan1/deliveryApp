@@ -5,7 +5,10 @@ import android.graphics.BitmapFactory
 import java.util.Base64
 
 class DecodeBase64ImageUseCase {
-    fun invoke(img: String): Bitmap? {
+    fun invoke(img: String? = null): Bitmap? {
+        if (img == null) {
+            return null
+        }
         return try {
             val base64Decoder = Base64.getDecoder()
             val decodedBytes = base64Decoder.decode(img)

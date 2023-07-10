@@ -27,28 +27,20 @@ fun CategoryScreen(navController: NavController) {
     val context = LocalContext.current
     val viewModel = hiltViewModel<CategoryViewModel>()
     val stateCategory by viewModel.stateCategory.collectAsState()
-    val isLoading by remember {
-        mutableStateOf(stateCategory.isLoading)
-    }
+    Log.d("11", "CategoryScreen")
     LaunchedEffect(Unit) {
         viewModel.send(GetCategoryEvent(context))
     }
-
-    if (isLoading) {
-        LoadingIndicator(modifier = Modifier)
-    } else {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(5.dp)
-        ) {
-            items(stateCategory.categories) { cat ->
-                CategoryItem(
-                    navController = navController,
-                    categoryViewModel = viewModel,
-                    model = cat
-                )
-            }
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(5.dp)
+    ) {
+        items(stateCategory.categories) { cat ->
+            CategoryItem(
+                navController = navController,
+                model = cat
+            )
         }
     }
 }
