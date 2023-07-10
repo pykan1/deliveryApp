@@ -189,8 +189,8 @@ class AuthViewModel @Inject constructor(
                         password = stateAuth.value.password
                     )
                 ).let {
+                    Log.d("11", "login user data $it")
                     val dataStoreManager = DataStoreManager(context)
-                    Log.d("11", it.toString())
                     userRepositoryImpl.insertUser(
                         UserModel(
                             id_role = it.role,
