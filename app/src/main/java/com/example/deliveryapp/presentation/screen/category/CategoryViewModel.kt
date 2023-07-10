@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.deliveryapp.data.api.model.AccessTokenModel
 import com.example.deliveryapp.data.api.remoteDataSource.BuyerRemoteDataSource
 import com.example.deliveryapp.data.datastore.DataStoreManager
+import com.example.deliveryapp.domain.usecase.GetAccessTokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,12 +34,11 @@ class CategoryViewModel @Inject constructor(
     }
 
     private fun getCategory(context: Context) {
-        val dataStoreManager = DataStoreManager(context)
         viewModelScope.launch {
             stateCategory.update { state ->
                 state.copy(isLoading = true)
             }
-            dataStoreManager.getAccessToken().first().let {
+            GetAccessTokenUseCase().invoke(context).let {
                 buyerRemoteDataSource.getCategory(
                     AccessTokenModel(
                         access_token = it

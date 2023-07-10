@@ -16,6 +16,4 @@ fun ItemsScreen(navController: NavController, idCategory: Int) {
         viewModel.send(GetItemsByCategoryEvent(idCategory, context))
     }
 
-
-
 }

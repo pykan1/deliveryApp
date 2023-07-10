@@ -36,8 +36,13 @@ class ItemsViewModel @Inject constructor(
                     id_category = idCategory
                 )
             ).let {
-                stateItems.emit(ItemsState())
+                stateItems.emit(ItemsState(
+                    isLoading = stateItems.value.isLoading,
+                    items = it
+                ))
             }
         }
     }
+
+
 }

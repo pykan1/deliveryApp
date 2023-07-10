@@ -34,7 +34,6 @@ class DataStoreManager(val context: Context) {
         return@map pref[stringPreferencesKey("access_token")] ?: ""
     }
 
-
     suspend fun deleteUser() {
         context.dataStore.edit { pref ->
             pref[stringPreferencesKey("refresh_token")] = ""
@@ -42,5 +41,7 @@ class DataStoreManager(val context: Context) {
             pref[stringPreferencesKey("number")] = ""
         }
     }
+
+
 
 }

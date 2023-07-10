@@ -16,7 +16,10 @@ import androidx.navigation.compose.composable
 import com.example.deliveryapp.R
 import com.example.deliveryapp.presentation.screen.auth.AuthScreen
 import com.example.deliveryapp.presentation.screen.category.CategoryScreen
+import com.example.deliveryapp.presentation.screen.item.ItemScreen
+import com.example.deliveryapp.presentation.screen.item.ItemState
 import com.example.deliveryapp.presentation.screen.items.ItemsScreen
+import com.google.gson.Gson
 
 sealed class Screens(val route: String, val icon: Int, val label: String) {
     object Main: Screens(route = "main_screen", icon = R.drawable.cart_icon, label = "Магазин")
@@ -24,7 +27,10 @@ sealed class Screens(val route: String, val icon: Int, val label: String) {
     object Catalog: Screens(route = "catalog_screen", icon = R.drawable.catalog_icon, label = "Каталог")
     object Trash: Screens(route = "trash_screen", icon = R.drawable.basket_icon, label = "Корзина")
     object Profile: Screens(route = "profile_screen", icon = R.drawable.user_icon, label = "Профиль")
-    object Items: Screens(route = "items/{id_category}", icon = R.drawable.not_image, label = "Item")
+    object Items: Screens(route = "items/{id_category}", icon = R.drawable.not_image, label = "Items")
+    object Item: Screens(route = "item/{item_state}", icon = R.drawable.not_image, label = "Item")
+
+
 }
 
 
@@ -61,6 +67,12 @@ fun SetupNavHost(navController: NavHostController, viewModel: NavigationViewMode
         composable(route = Screens.Items.route) {
             val idCategory = it.arguments?.getInt("id_category")?.toInt()
             ItemsScreen(navController, idCategory!!)
+        }
+
+        composable(route = Screens.Item.route) {
+            val stateItemJson = it.arguments?.getString("item_state")
+            val stateItem = Gson().fromJson(stateItemJson, ItemState::class.java)
+            ItemScreen(navController = navController, itemState = stateItem)
         }
     }
 }
