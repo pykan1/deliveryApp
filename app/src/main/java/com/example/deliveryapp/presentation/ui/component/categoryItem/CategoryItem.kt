@@ -3,6 +3,7 @@ package com.example.deliveryapp.presentation.ui.component.categoryItem
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -47,6 +48,7 @@ fun CategoryItem(
             .clip(RoundedCornerShape(15.dp))
             .border(width = 2.dp, color = Color.LightGray, shape = RoundedCornerShape(15.dp))
             .background(Color.Transparent)
+            .clickable { viewModel.send(OpenCategoriesItemsEvent(navController)) }
     ) {
         if (stateCategoryItem.value.isLoading) {
             CircularProgressIndicator(

@@ -1,10 +1,10 @@
 package com.example.deliveryapp.presentation.screen.item
 
-import android.graphics.Bitmap
+import androidx.compose.ui.graphics.ImageBitmap
 import com.example.deliveryapp.domain.model.ReviewModel
 import java.util.UUID
 
-data class ItemState (
+data class ItemState(
     val id_item: UUID = UUID.randomUUID(),
     val id_category: Int = 0,
     val name: String = "",
@@ -13,5 +13,5 @@ data class ItemState (
     val amount: Int = 0,
     val rate: Float = 0.0F,
     val cost: Int = 0,
-    val decodeImg: Bitmap? = null
+    val decodeImg: ImageBitmap? = null
 )

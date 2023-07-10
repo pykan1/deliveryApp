@@ -1,8 +1,8 @@
 package com.example.deliveryapp.presentation.screen.item
 
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.deliveryapp.data.api.apiService.BuyerService
 import com.example.deliveryapp.data.api.remoteDataSource.BuyerRemoteDataSource
 import com.example.deliveryapp.domain.model.ItemModel
 import com.example.deliveryapp.domain.usecase.DecodeBase64ImageUseCase
@@ -39,7 +39,7 @@ class ItemViewModel @Inject constructor(
                     amount = itemModel.amount,
                     rate = itemModel.rate,
                     cost = itemModel.cost,
-                    decodeImg = DecodeBase64ImageUseCase().invoke(itemModel.img)
+                    decodeImg = DecodeBase64ImageUseCase().invoke(itemModel.img)?.asImageBitmap()
                 )
             )
         }

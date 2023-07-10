@@ -1,6 +1,7 @@
 package com.example.deliveryapp.presentation.screen.items
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.deliveryapp.data.api.model.GetItemsByCategoryModel
@@ -36,6 +37,7 @@ class ItemsViewModel @Inject constructor(
                     id_category = idCategory
                 )
             ).let {
+                Log.d("11", it.toString())
                 stateItems.emit(ItemsState(
                     isLoading = stateItems.value.isLoading,
                     items = it

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.compose.runtime.remember
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import com.example.deliveryapp.data.api.model.AccessTokenModel
 import com.example.deliveryapp.data.api.remoteDataSource.BuyerRemoteDataSource
 import com.example.deliveryapp.data.datastore.DataStoreManager
@@ -55,4 +56,5 @@ class CategoryViewModel @Inject constructor(
             }
         }
     }
+
 }

@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import com.example.deliveryapp.domain.usecase.DecodeBase64ImageUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -29,6 +30,10 @@ class CategoryItemViewModel : ViewModel() {
 
             is InitDataEvent -> {
                 initData(event.title, event.img, event.id_category)
+            }
+
+            is OpenCategoriesItemsEvent -> {
+                openCategoriseItems(event.navController)
             }
         }
 
@@ -94,6 +99,12 @@ class CategoryItemViewModel : ViewModel() {
                 )
             )
         }
+    }
+
+    private fun openCategoriseItems(navController: NavController) {
+        navController.navigate(
+            "items/${stateCategoryItem.value.id_category}"
+        )
     }
 }
 
