@@ -46,8 +46,4 @@ class AuthViewModel @Inject constructor(
     fun send(event: AuthEvent) {
         reducer.sendEvent(event)
     }
-
-
-
-
 }

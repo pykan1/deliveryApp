@@ -58,37 +58,36 @@ class AuthReducer(
                 register(oldState, event.context, event.navController)
             }
         }
-
     }
 
     private fun changeLogin(oldState: AuthState, event: AuthEvent.ChangeLoginEvent) {
         viewModelScope.launch {
-            setState(oldState.copy(login = event.login))
+//            setState(oldState.copy(login = event.login))
         }
     }
 
     private fun changePassword(oldState: AuthState, event: AuthEvent.ChangePasswordEvent) {
         viewModelScope.launch {
-            setState(oldState.copy(password = event.password))
+//            setState(oldState.copy(password = event.password))
         }
     }
 
     private fun changePassword2(oldState: AuthState, event: AuthEvent.ChangePassword2Event) {
         viewModelScope.launch {
-            setState(oldState.copy(password2 = event.password2))
+//            setState(oldState.copy(password2 = event.password2))
         }
     }
 
     private fun changeNumber(oldState: AuthState, event: AuthEvent.ChangeNumberEvent) {
         viewModelScope.launch {
-            setState(oldState.copy(number = event.number))
+//            setState(oldState.copy(number = event.number))
         }
     }
 
     private fun checkNumber(oldState: AuthState) {
 
         viewModelScope.launch {
-            val numberModel = NumberModel(number = oldState.number)
+            val numberModel = NumberModel(number = oldState.number.value)
             authRemoteDataSource.checkNumber(numberModel).let {
                 setState(
                     if (it) oldState.copy(screen = "login") else oldState.copy(screen = "register")
@@ -105,8 +104,8 @@ class AuthReducer(
                 authRemoteDataSource.login(
                     AuthModel(
                         id_role = 1,
-                        number = oldState.number,
-                        password = oldState.password
+                        number = oldState.number.value,
+                        password = oldState.password.value
                     )
                 ).let {
                     Log.d("11", "login user data $it")
@@ -144,9 +143,9 @@ class AuthReducer(
                     authRemoteDataSource.register(
                         RegModel(
                             id_role = 1,
-                            number = oldState.number,
-                            password = oldState.password,
-                            login = oldState.login
+                            number = oldState.number.value,
+                            password = oldState.password.value,
+                            login = oldState.login.value
                         )
                     ).let {
                         val dataStoreManager = DataStoreManager(context)
@@ -177,6 +176,4 @@ class AuthReducer(
             }
         }
     }
-
-
 }

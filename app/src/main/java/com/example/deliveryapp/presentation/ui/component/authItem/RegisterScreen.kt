@@ -67,8 +67,8 @@ fun RegisterScreen(viewModel: AuthViewModel, navController: NavController) {
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 TextField(
-                    value = stateAuth.login,
-                    onValueChange = { viewModel.send(event = AuthEvent.ChangeLoginEvent(it)) },
+                    value = stateAuth.login.value,
+                    onValueChange = { stateAuth.login.value = it },
                     label = { Text(text = "Логин...") },
                     colors = TextFieldDefaults.textFieldColors(
                         textColor = Color.Black,
@@ -83,8 +83,8 @@ fun RegisterScreen(viewModel: AuthViewModel, navController: NavController) {
                 )
 
                 TextField(
-                    value = stateAuth.password,
-                    onValueChange = { viewModel.send(event = AuthEvent.ChangePasswordEvent(it)) },
+                    value = stateAuth.password.value,
+                    onValueChange = { stateAuth.password.value = it },
                     label = { Text(text = "Пароль...") },
                     colors = TextFieldDefaults.textFieldColors(
                         textColor = Color.Black,
@@ -99,8 +99,8 @@ fun RegisterScreen(viewModel: AuthViewModel, navController: NavController) {
                 )
 
                 TextField(
-                    value = stateAuth.password2,
-                    onValueChange = { viewModel.send(event = AuthEvent.ChangePassword2Event(it)) },
+                    value = stateAuth.password2.value,
+                    onValueChange = { stateAuth.password2.value = it },
                     label = { Text(text = "Повторите пароль...") },
                     colors = TextFieldDefaults.textFieldColors(
                         textColor = Color.Black,

@@ -59,8 +59,8 @@ fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
             contentAlignment = Alignment.BottomCenter
         ) {
             TextField(
-                value = stateAuth.password,
-                onValueChange = { viewModel.send(event = AuthEvent.ChangePasswordEvent(it)) },
+                value = stateAuth.password.value,
+                onValueChange = { stateAuth.password.value = it },
                 label = { Text(text = "Пароль...") },
                 colors = TextFieldDefaults.textFieldColors(
                     textColor = Color.Black,

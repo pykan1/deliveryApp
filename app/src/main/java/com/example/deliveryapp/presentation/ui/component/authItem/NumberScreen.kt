@@ -17,6 +17,7 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -55,8 +56,8 @@ fun NumberScreen(viewModel: AuthViewModel) {
             contentAlignment = Alignment.BottomCenter
         ) {
             TextField(
-                value = stateAuth.number,
-                onValueChange = { viewModel.send(event = AuthEvent.ChangeNumberEvent(it)) },
+                value = stateAuth.number.value,
+                onValueChange = { stateAuth.number.value = it },
                 label = { Text(text = "Номер телефона...") },
                 colors = TextFieldDefaults.textFieldColors(
                     textColor = Color.Black,
