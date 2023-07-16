@@ -7,12 +7,17 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
+import com.example.deliveryapp.data.api.remoteDataSource.BuyerRemoteDataSource
 import com.example.deliveryapp.domain.usecase.DecodeBase64ImageUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.util.Base64
+import javax.inject.Inject
 
-class CategoryItemViewModel : ViewModel() {
+
+//@HiltViewModel
+class CategoryItemViewModel:ViewModel() {
     val stateCategoryItem = MutableStateFlow(CategoryItemState())
 
     fun send(event: CategoryItemEvent) {
@@ -47,6 +52,7 @@ class CategoryItemViewModel : ViewModel() {
 
 
     private fun openCategoriseItems(navController: NavController) {
+        Log.d("11", stateCategoryItem.value.id_category.toString())
         navController.navigate(
             "items/${stateCategoryItem.value.id_category}"
         )

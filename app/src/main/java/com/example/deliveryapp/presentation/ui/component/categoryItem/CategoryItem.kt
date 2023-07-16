@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -29,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.deliveryapp.R
 import com.example.deliveryapp.domain.model.CategoryModel
@@ -39,11 +41,11 @@ fun CategoryItem(
     navController: NavController,
     model: CategoryModel
 ) {
-    val viewModel = CategoryItemViewModel()
-    val stateCategoryItem by viewModel.stateCategoryItem.collectAsState()
-    LaunchedEffect(key1 = stateCategoryItem.id_category == 0) {
+    val viewModel = remember { CategoryItemViewModel() }
+    LaunchedEffect(Unit) {
         viewModel.send(InitDataEvent(model.category, model.img, model.id_category))
     }
+    val stateCategoryItem by viewModel.stateCategoryItem.collectAsState()
     Box(
         modifier = Modifier
             .fillMaxWidth()

@@ -1,5 +1,6 @@
 package com.example.deliveryapp.presentation.screen.item
 
+import android.util.Log
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -29,6 +30,7 @@ class ItemViewModel @Inject constructor(
 
     private fun initItem(itemModel: ItemModel) {
         viewModelScope.launch {
+            Log.d("11", "initData")
             stateItem.emit(
                 ItemState(
                     id_item = itemModel.id_item,
