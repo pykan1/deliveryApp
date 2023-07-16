@@ -18,6 +18,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -31,18 +32,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.deliveryapp.presentation.screen.auth.AuthEvent
 import com.example.deliveryapp.presentation.screen.auth.AuthViewModel
-import com.example.deliveryapp.presentation.screen.auth.ChangeLoginEvent
-import com.example.deliveryapp.presentation.screen.auth.ChangePassword2Event
-import com.example.deliveryapp.presentation.screen.auth.ChangePasswordEvent
-import com.example.deliveryapp.presentation.screen.auth.RegisterEvent
 import com.example.deliveryapp.presentation.ui.theme.ButtonColor
 import com.example.deliveryapp.presentation.ui.theme.TextFieldColor
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterScreen(viewModel: AuthViewModel, navController: NavController) {
-    val stateAuth = viewModel.stateAuth.collectAsState()
+    val stateAuth by viewModel.state.collectAsState()
 
     val context = LocalContext.current
     val localFocusManager = LocalFocusManager.current
@@ -69,8 +67,8 @@ fun RegisterScreen(viewModel: AuthViewModel, navController: NavController) {
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 TextField(
-                    value = stateAuth.value.login,
-                    onValueChange = { viewModel.send(event = ChangeLoginEvent(it)) },
+                    value = stateAuth.login,
+                    onValueChange = { viewModel.send(event = AuthEvent.ChangeLoginEvent(it)) },
                     label = { Text(text = "Логин...") },
                     colors = TextFieldDefaults.textFieldColors(
                         textColor = Color.Black,
@@ -85,8 +83,8 @@ fun RegisterScreen(viewModel: AuthViewModel, navController: NavController) {
                 )
 
                 TextField(
-                    value = stateAuth.value.password,
-                    onValueChange = { viewModel.send(event = ChangePasswordEvent(it)) },
+                    value = stateAuth.password,
+                    onValueChange = { viewModel.send(event = AuthEvent.ChangePasswordEvent(it)) },
                     label = { Text(text = "Пароль...") },
                     colors = TextFieldDefaults.textFieldColors(
                         textColor = Color.Black,
@@ -101,8 +99,8 @@ fun RegisterScreen(viewModel: AuthViewModel, navController: NavController) {
                 )
 
                 TextField(
-                    value = stateAuth.value.password2,
-                    onValueChange = { viewModel.send(event = ChangePassword2Event(it)) },
+                    value = stateAuth.password2,
+                    onValueChange = { viewModel.send(event = AuthEvent.ChangePassword2Event(it)) },
                     label = { Text(text = "Повторите пароль...") },
                     colors = TextFieldDefaults.textFieldColors(
                         textColor = Color.Black,
@@ -127,7 +125,7 @@ fun RegisterScreen(viewModel: AuthViewModel, navController: NavController) {
             Button(
                 onClick = {
                     keyboardController?.hide()
-                    viewModel.send(event = RegisterEvent(context, navController))
+                    viewModel.send(event = AuthEvent.RegisterEvent(context, navController))
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = ButtonColor,

@@ -16,6 +16,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -29,16 +30,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.deliveryapp.presentation.screen.auth.AuthEvent
 import com.example.deliveryapp.presentation.screen.auth.AuthViewModel
-import com.example.deliveryapp.presentation.screen.auth.ChangePasswordEvent
-import com.example.deliveryapp.presentation.screen.auth.LoginEvent
 import com.example.deliveryapp.presentation.ui.theme.ButtonColor
 import com.example.deliveryapp.presentation.ui.theme.TextFieldColor
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun     LoginScreen(viewModel: AuthViewModel, navController: NavController) {
-    val stateAuth = viewModel.stateAuth.collectAsState()
+fun LoginScreen(viewModel: AuthViewModel, navController: NavController) {
+    val stateAuth by viewModel.state.collectAsState()
     val context = LocalContext.current
     val localFocusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -59,8 +59,8 @@ fun     LoginScreen(viewModel: AuthViewModel, navController: NavController) {
             contentAlignment = Alignment.BottomCenter
         ) {
             TextField(
-                value = stateAuth.value.password,
-                onValueChange = { viewModel.send(event = ChangePasswordEvent(it)) },
+                value = stateAuth.password,
+                onValueChange = { viewModel.send(event = AuthEvent.ChangePasswordEvent(it)) },
                 label = { Text(text = "Пароль...") },
                 colors = TextFieldDefaults.textFieldColors(
                     textColor = Color.Black,
@@ -84,7 +84,7 @@ fun     LoginScreen(viewModel: AuthViewModel, navController: NavController) {
             Button(
                 onClick = {
                     keyboardController?.hide()
-                    viewModel.send(event = LoginEvent(context, navController))
+                    viewModel.send(event = AuthEvent.LoginEvent(context, navController))
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = ButtonColor,

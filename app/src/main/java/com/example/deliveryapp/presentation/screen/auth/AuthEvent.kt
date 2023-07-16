@@ -1,20 +1,25 @@
 package com.example.deliveryapp.presentation.screen.auth
 
 import android.content.Context
+import androidx.compose.runtime.Immutable
 import androidx.navigation.NavController
+import com.example.deliveryapp.presentation.screen.base.UiEvent
 
-interface AuthEvent
+@Immutable
+sealed class AuthEvent : UiEvent {
 
-class ChangeLoginEvent(val login: String): AuthEvent
 
-class ChangePasswordEvent(val password: String): AuthEvent
+    data class ChangeLoginEvent(val login: String) : AuthEvent()
 
-class ChangePassword2Event(val password2: String): AuthEvent
+    data class ChangePasswordEvent(val password: String) : AuthEvent()
 
-class ChangeNumberEvent(val number: String): AuthEvent
+    data class ChangePassword2Event(val password2: String) : AuthEvent()
 
-class CheckNumberEvent(): AuthEvent
+    data class ChangeNumberEvent(val number: String) : AuthEvent()
 
-class LoginEvent(val context: Context, val navController: NavController): AuthEvent
+    object CheckNumberEvent : AuthEvent()
 
-class RegisterEvent(val context: Context, val navController: NavController): AuthEvent
+    data class LoginEvent(val context: Context, val navController: NavController) : AuthEvent()
+
+    data class RegisterEvent(val context: Context, val navController: NavController) : AuthEvent()
+}

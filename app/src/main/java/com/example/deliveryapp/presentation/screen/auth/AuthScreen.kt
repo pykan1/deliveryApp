@@ -1,5 +1,6 @@
 package com.example.deliveryapp.presentation.screen.auth
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,6 +8,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,8 +27,9 @@ import com.example.deliveryapp.presentation.ui.component.authItem.RegisterScreen
 
 @Composable
 fun AuthScreen(navController: NavController) {
+    Log.d("11", "AuthScreen")
     val viewModel = hiltViewModel<AuthViewModel>()
-    val stateAuth = viewModel.stateAuth.collectAsState()
+    val stateAuth by viewModel.state.collectAsState()
     Box(modifier = Modifier.fillMaxSize()) {
         val composition = rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.background))
         val progress by animateLottieCompositionAsState(
@@ -38,7 +41,7 @@ fun AuthScreen(navController: NavController) {
             composition = composition.value,
             progress = { progress }
         )
-        when (stateAuth.value.screen) {
+        when (stateAuth.screen) {
             "number" -> {
                 NumberScreen(viewModel = viewModel)
             }
@@ -51,7 +54,7 @@ fun AuthScreen(navController: NavController) {
                 RegisterScreen(viewModel = viewModel, navController)
             }
         }
-        if(stateAuth.value.isLoading) {
+        if(stateAuth.isLoading) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()

@@ -16,6 +16,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -27,16 +28,15 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.deliveryapp.presentation.screen.auth.AuthEvent
 import com.example.deliveryapp.presentation.screen.auth.AuthViewModel
-import com.example.deliveryapp.presentation.screen.auth.ChangeNumberEvent
-import com.example.deliveryapp.presentation.screen.auth.CheckNumberEvent
 import com.example.deliveryapp.presentation.ui.theme.ButtonColor
 import com.example.deliveryapp.presentation.ui.theme.TextFieldColor
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun NumberScreen(viewModel: AuthViewModel) {
-    val stateAuth = viewModel.stateAuth.collectAsState()
+    val stateAuth by viewModel.state.collectAsState()
     val localFocusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -55,8 +55,8 @@ fun NumberScreen(viewModel: AuthViewModel) {
             contentAlignment = Alignment.BottomCenter
         ) {
             TextField(
-                value = stateAuth.value.number,
-                onValueChange = { viewModel.send(event = ChangeNumberEvent(it)) },
+                value = stateAuth.number,
+                onValueChange = { viewModel.send(event = AuthEvent.ChangeNumberEvent(it)) },
                 label = { Text(text = "Номер телефона...") },
                 colors = TextFieldDefaults.textFieldColors(
                     textColor = Color.Black,
@@ -80,7 +80,7 @@ fun NumberScreen(viewModel: AuthViewModel) {
             Button(
                 onClick = {
                     keyboardController?.hide()
-                    viewModel.send(event = CheckNumberEvent())
+                    viewModel.send(event = AuthEvent.CheckNumberEvent)
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = ButtonColor,
